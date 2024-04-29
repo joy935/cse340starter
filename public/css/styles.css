@@ -6,7 +6,7 @@
 }
 
 :root {
-  --primary-color: rgb(47, 188, 235);
+  --primary-color: #4e9ad8;
   --secondary-color: #333;
   --third-color: #fff;
   --font-family: 'Roboto', sans-serif;
@@ -78,3 +78,15 @@ nav ul li a {
   padding: 0.5rem;
   line-height: 0.5;
 }
+.ownTodayBtn img {
+  width: 50%;
+  height: auto;
+}
+
+/*----- reviews -----*/
+#reviews ul li {
+  line-height: 2;
+}
+/*----- upgrades -----*/
+
+/*----- footer -----*/
