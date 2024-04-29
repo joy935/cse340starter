@@ -1,7 +1,4 @@
 @media only screen and (min-width: 800px) {
-    #top-header {
-        max-width: 700px;
-    }
     body {
         background-image: url(https://raw.githubusercontent.com/joy935/cse340starter/main/public/images/site/small_check.jpg);
         background-size: cover;
@@ -11,6 +8,14 @@
         border: 0.2rem solid var(--primary-color);
         border-radius: 0.5rem;
         background-color: var(--third-color);
-        padding: 1rem;
+        padding: 0.2rem;
+    }
+    #reviews-upgs {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+    #upgrades-whtitle {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
     }
 }
