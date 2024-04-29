@@ -49,3 +49,8 @@ nav ul {
   list-style-type: none; /* remove bullet points */
  padding: 1rem; 
 }
+nav ul li a {
+  text-decoration: none;
+  color: var(--third-color)
+}
+/*----- hero -----*/
