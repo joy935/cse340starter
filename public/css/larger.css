@@ -1,4 +1,4 @@
-@media only screen and (min-width: 800px) {
+@media only screen and (min-width: 900px) {
     body {
         background-image: url(https://raw.githubusercontent.com/joy935/cse340starter/main/public/images/site/small_check.jpg);
         background-size: cover;
@@ -8,14 +8,19 @@
         border: 0.2rem solid var(--primary-color);
         border-radius: 0.5rem;
         background-color: var(--third-color);
-        padding: 0.2rem;
+        padding: 0.5rem;
+    }
+    .siteName {
+        position: relative;
+        text-align: left;
+    }
+    #tools {
+        position: relative;
+        text-align: right;
     }
     #reviews-upgs {
         display: grid;
         grid-template-columns: 1fr 1fr;
-    }
-    #upgrades-whtitle {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
     }
 }

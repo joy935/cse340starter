@@ -15,7 +15,7 @@
 body {
   margin: 0 auto;
   font-family: var(--font-family);
-  max-width: 700px;
+  max-width: 900px;
   padding: 10px;
 }
 
@@ -29,7 +29,6 @@ header {
 header a {
   text-decoration: none;
 }
-
 .siteName {
   position: absolute;
   left: 1rem;
@@ -87,25 +86,23 @@ nav ul li a {
 }
 
 /*----- reviews -----*/
-#reviews ul li {
-  line-height: 2;
-}
-/*----- upgrades -----*/
 #reviews-upgs {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
 }
+#reviews ul li {
+  line-height: 2;
+}
+/*----- upgrades -----*/
 #upgrades-whtitle {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
   align-items: center;
   gap: 0.5rem;
   padding: 1rem;
 }
 #upgrades {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1fr 1fr;
   gap: 1rem;
 }
 .upper-box {
