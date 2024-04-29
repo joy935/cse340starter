@@ -100,7 +100,7 @@ nav ul li a {
   gap: 0.5rem;
   padding: 1rem;
 }
-#upgrades {
+#upgrades-whtitle {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 1rem;
