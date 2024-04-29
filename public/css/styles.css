@@ -8,6 +8,7 @@
 :root {
   --primary-color: rgb(47, 188, 235);
   --secondary-color: #333;
+  --third-color: #fff;
   --font-family: 'Roboto', sans-serif;
 }
 
@@ -37,7 +38,14 @@ header a {
   top: 1rem;
   right: 1rem;
 }
-
-#tools a {
-  text-transform: capitalize; /* capitalize the text */
+/*----- responsive nav -----*/
+nav ul {
+  display: flex;
+  justify-content: space-around;
+  text-align: center;
+  text-decoration: none;
+  color: var(--third-color);
+  background-color: var(--secondary-color);
+  list-style-type: none; /* remove bullet points */
+ padding: 1rem; 
 }
