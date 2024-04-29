@@ -4,3 +4,40 @@
 *:after {
   box-sizing: border-box;
 }
+
+:root {
+  --primary-color: rgb(47, 188, 235);
+  --secondary-color: #333;
+  --font-family: 'Roboto', sans-serif;
+}
+
+body {
+  margin: 0 auto;
+  font-family: var(--font-family);
+}
+
+/*---------- HOMEPAGE ----------*/
+/*----- header -----*/
+header {
+  padding: 1rem;
+  text-align: center;
+}
+header a {
+  text-decoration: none;
+}
+
+.siteName {
+  position: absolute;
+  left: 1rem;
+  top: 1rem;
+  font-size: 1.5rem;
+}
+#tools {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+
+#tools a {
+  text-transform: capitalize; /* capitalize the text */
+}
