@@ -22,6 +22,7 @@ body {
 header {
   padding: 1rem;
   text-align: center;
+  padding-bottom: 3rem;
 }
 header a {
   text-decoration: none;
@@ -31,7 +32,7 @@ header a {
   position: absolute;
   left: 1rem;
   top: 1rem;
-  font-size: 1.5rem;
+  font-size: 1.8rem;
 }
 #tools {
   position: absolute;
@@ -88,5 +89,25 @@ nav ul li a {
   line-height: 2;
 }
 /*----- upgrades -----*/
-
+#upgrades {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 2fr));
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+.upper-box {
+  display: flex;
+  flex-direction: column;
+}
+.upgrade-box {
+  background-color: var(--primary-color);
+  text-align: center;
+  border: 1px solid var(--secondary-color);
+  padding: 0.5rem;
+  max-width: 200px;
+}
+.upper-box {
+  text-align: center;
+}
 /*----- footer -----*/
