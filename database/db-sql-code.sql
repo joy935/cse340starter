@@ -234,3 +234,16 @@ VALUES   (
     'White',
     5
   );
+
+-- Query 4: UPDATE the GM Hummer description
+UPDATE inventory
+	SET inv_description = REPLACE('Do you have 6 kids and like to go offroading? The Hummer gives you the small interiors with an engine to get you out of any muddy or rocky situation.', 'the small interiors', 'a huge interior')
+	WHERE inv_make = 'GM';
+
+-- Query 6: UPDATE all records in the inventory table to add "/vehicles" to the middle of the file path in the inv_image and inv_thumbnail columns
+UPDATE inventory 
+	SET 
+		inv_image = REPLACE(inv_image, '/images/', '/images/vehicles/'),
+    	inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/')
+	WHERE inv_image LIKE '/images/%.jpg'
+  	AND inv_thumbnail LIKE '/images/%-tn.jpg';
