@@ -1,8 +1,8 @@
-CREATE TYPE public sample AS ENUMCREATE TYPE public.account_type AS ENUM
+CREATE TYPE public.account_type AS ENUM
     ('Client', 'Employee', 'Admin');
 
 ALTER TYPE public.account_type
-    OWNER TO cse340;
+    OWNER TO cse340db;
 
 -- Table structure for table `classification`
 CREATE TABLE public.classification (
