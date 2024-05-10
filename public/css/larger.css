@@ -31,4 +31,13 @@
         gap: 1rem;
     }
     /* grid classification by single view */
+    #single-display {
+        display: grid;
+        grid-template-columns: 2fr 1fr;
+        gap: 1rem;
+    }
+    .single-img {
+        width: 100%;
+        height: auto;
+    }
 }
