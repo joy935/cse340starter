@@ -64,7 +64,6 @@ Util.buildSingleView = async function(vehicle){
   let single = '';
   if(vehicle) {
   single = '<div id="single-display">'
-    single += '<h2 id="title">' + vehicle.inv_make + ' ' + vehicle.inv_model + '</h2>'
     single += '<img src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' on CSE Motors" />'
     single += '<div class="single-details">'
         single += '<p><strong>Make:</strong> ' + vehicle.inv_make + '</p>'
@@ -74,9 +73,9 @@ Util.buildSingleView = async function(vehicle){
     single += '</div>'
     single += '<div class="single-description">'
       single += '<h3>Vehicle Description</h3>'
-      single += '<p>Description: ' + vehicle.inv_description + '</p>'
-      single += '<p>Miles: ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
-      single += '<p>Color: ' + vehicle.inv_color + '</p>'
+      single += '<p><strong>Description:</strong> ' + vehicle.inv_description + '</p>'
+      single += '<p><strong>Miles:</strong> ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
+      single += '<p><strong>Color:</strong> ' + vehicle.inv_color + '</p>'
     single += '</div>'  
   single += '</div>'
 } else {
