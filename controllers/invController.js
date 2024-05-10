@@ -30,7 +30,7 @@ invCont.buildBySingleId = async function (req, res, next) {
     return res.status(404).send("Vehicle not found");
   }
 
-  res.render("./inventory/classification", {
+  res.render("./inventory/single", {
     title: vehicule.inv_make + " " + vehicule.inv_model,
     vehicule,
   });
