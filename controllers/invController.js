@@ -19,4 +19,21 @@ invCont.buildByClassificationId = async function (req, res, next) {
   })
 }
 
-module.exports = invCont
+/* ***************************
+ *  Build single view for vehicle
+ * ************************** */
+invCont.buildBySingleId = async function (req, res, next) {
+  const singleId = req.params.singleId
+  const vehicule = await invModel.getVehiculeById(singleId);
+
+  if (!vehicule) {
+    return res.status(404).send("Vehicle not found");
+  }
+
+  res.render("./inventory/classification", {
+    title: vehicule.inv_make + " " + vehicule.inv_model,
+    vehicule,
+  });
+}
+
+module.exports = invCont;
