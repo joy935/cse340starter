@@ -25,6 +25,7 @@ invCont.buildByClassificationId = async function (req, res, next) {
 invCont.buildBySingleId = async function (req, res, next) {
   const singleId = req.params.singleId
   const vehicule = await invModel.getVehiculeById(singleId);
+  const singleView = await utilities.buildSingleView(vehicule)
   let nav = await utilities.getNav()
   if (!vehicule) {
     return res.status(404).send("Vehicle not found");
@@ -32,7 +33,7 @@ invCont.buildBySingleId = async function (req, res, next) {
 
   res.render("./inventory/single", {
     title: vehicule.inv_make + " " + vehicule.inv_model,
-    vehicule,
+    singleView,
     nav,
   });
 }
