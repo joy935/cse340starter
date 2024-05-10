@@ -126,7 +126,7 @@ nav ul li a {
 }
 
 /*----- footer -----*/
-/*---------- SINGLE VIEW ----------*/
+/*---------- GRID CLASSIFICATION VIEW PAGE ----------*/
 #inv-display {
   display: grid;
   grid-template-columns: 1fr;
@@ -152,4 +152,30 @@ nav ul li a {
 .namePrice span {
   font-size: 1.1rem;
   font-weight: bold;
+}
+
+/*----- SINGLE VIEW PAGE -----*/
+.single-img {
+  max-width: 90%;
+  height: auto;
+  text-align: center;
+  justify-content: center;
+}
+.single-img img {
+  display: block;
+  margin: auto;
+}
+.single-details {
+  background-color: var(--primary-color);
+  line-height: 5px;
+  padding: .7rem;
+}
+.emphisize {
+  font-size: 1.2rem;
+}
+.single-description h2 {
+  font-size: 1.2rem;
+}
+.single-description {
+  padding: .7rem;
 }
