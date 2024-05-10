@@ -126,3 +126,10 @@ nav ul li a {
 }
 
 /*----- footer -----*/
+/*---------- SINGLE VIEW ----------*/
+#inv-display {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  text-decoration: none;
+}
