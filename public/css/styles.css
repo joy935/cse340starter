@@ -169,6 +169,7 @@ nav ul li a {
   background-color: var(--primary-color);
   line-height: 5px;
   padding: .7rem;
+  max-width: 90%;
 }
 .emphisize {
   font-size: 1.2rem;
