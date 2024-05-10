@@ -61,8 +61,8 @@ Util.buildClassificationGrid = async function(data){
 * Build the single view HTML
 * ************************************ */
 Util.buildSingleView = async function(vehicle){
-  let single 
-  if(single.length > 0) {
+  let single = '';
+  if(vehicle) {
   single = '<div id="single-display">'
     single += '<h2 id="title">' + vehicle.inv_make + ' ' + vehicle.inv_model + '</h2>'
     single += '<img src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' on CSE Motors" />'
