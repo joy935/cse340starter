@@ -10,6 +10,7 @@ router.get("/type/:classificationId", invController.buildByClassificationId);
 router.get("/detail/:singleId", invController.buildBySingleId);
 
 // Route to generate an error in the footer
-router.get('/errors/:generateError', invController.generateError);
+// router.get('/errors/:generateError', invController.generateError);
+router.get('/broken-link', invController.generateError);
 
 module.exports = router;
