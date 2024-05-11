@@ -43,4 +43,12 @@ async function getVehiculeById(singleId) {
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehiculeById};
+/* ***************************
+ *  Get link in footer to generate an error
+ * ************************** */
+async function generateError() {
+    // intentionally throw an error to simulate a database query error
+    throw new Error('Intentional error from inventory model');
+  }
+
+module.exports = {getClassifications, getInventoryByClassificationId, getVehiculeById, generateError};

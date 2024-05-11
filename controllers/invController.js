@@ -38,4 +38,15 @@ invCont.buildBySingleId = async function (req, res, next) {
   });
 }
 
+/* ***************************
+ *  Build an intentional error in the footer
+ * ************************** */
+invCont.generateError = async function (req, res, next) {
+  const generateError = req.params.generateError
+  if (generateError === "true") {
+    return res.status(500).send("Intentional Error")
+  }
+  res.send("No error generated")
+}
+
 module.exports = invCont;
