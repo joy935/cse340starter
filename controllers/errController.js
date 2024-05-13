@@ -1,5 +1,5 @@
 const generateError = (req, res, next) => {
-    throw new Error('An intentional error occurred');
+    throw new ReferenceError('An intentional error occurred');
   };
   
-  exports.generateError = generateError;
+exports.generateError = generateError;
