@@ -58,32 +58,32 @@ Util.buildClassificationGrid = async function(data){
 }
 
 /* **************************************
-* Build the single view HTML
+* Build the detail view HTML
 * ************************************ */
 Util.buildSingleView = async function(vehicle){
-  let single = '';
+  let detail = '';
   if(vehicle) {
-  single = '<div id="single-display">'
-    single += '<img class="single-img" src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' on CSE Motors" />'
-    single += '<div class="single-box">'
-      single += '<div class="single-details">'
-          single += '<p class="emphisize"><strong>Make:</strong> ' + vehicle.inv_make + '</p>'
-        single += '<p class="emphisize"><strong>Model:</strong> ' + vehicle.inv_model + '</p>'
-        single += '<p><strong>Year:</strong> ' + vehicle.inv_year + '</p>'
-        single += '<p><strong>Price:</strong> $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</p>'
-      single += '</div>'
-      single += '<div class="single-description">'
-        single += '<h2>Vehicle Description</h2>'
-        single += '<p><strong>Description:</strong> ' + vehicle.inv_description + '</p>'
-        single += '<p><strong>Miles:</strong> ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
-        single += '<p><strong>Color:</strong> ' + vehicle.inv_color + '</p>'
-      single += '</div>'  
-    single += '</div>'
-  single += '</div>'
+  detail = '<div id="single-display">'
+    detail += '<img class="single-img" src="' + vehicle.inv_image + '" alt="Image of ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' on CSE Motors" />'
+    detail += '<div class="single-box">'
+      detail += '<div class="single-details">'
+          detail += '<p class="emphisize"><strong>Make:</strong> ' + vehicle.inv_make + '</p>'
+        detail += '<p class="emphisize"><strong>Model:</strong> ' + vehicle.inv_model + '</p>'
+        detail += '<p><strong>Year:</strong> ' + vehicle.inv_year + '</p>'
+        detail += '<p><strong>Price:</strong> $' + new Intl.NumberFormat('en-US').format(vehicle.inv_price) + '</p>'
+      detail += '</div>'
+      detail += '<div class="single-description">'
+        detail += '<h2>Vehicle Description</h2>'
+        detail += '<p><strong>Description:</strong> ' + vehicle.inv_description + '</p>'
+        detail += '<p><strong>Miles:</strong> ' + new Intl.NumberFormat('en-US').format(vehicle.inv_miles) + '</p>'
+        detail += '<p><strong>Color:</strong> ' + vehicle.inv_color + '</p>'
+      detail += '</div>'  
+    detail += '</div>'
+  detail += '</div>'
 } else {
-  single += '<p class="notice">Sorry, that vehicle could not be found.</p>'
+  detail += '<p class="notice">Sorry, that vehicle could not be found.</p>'
 }
-return single
+return detail
 }
 
 /* ****************************************
