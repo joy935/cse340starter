@@ -30,23 +30,11 @@ invCont.buildBySingleId = async function (req, res, next) {
   if (!vehicule) {
     return res.status(404).send("Vehicle not found");
   }
-
-  res.render("./inventory/single", {
+  res.render("./inventory/detail", {
     title: vehicule.inv_make + " " + vehicule.inv_model,
     singleView,
     nav,
   });
-}
-
-/* ***************************
- *  Build an intentional error in the footer
- * ************************** */
-invCont.generateError = async function (req, res, next) {
-  const generateError = req.params.generateError
-  if (generateError === "true") {
-    return res.status(500).send("Intentional Error")
-  }
-  res.send("No error generated")
 }
 
 module.exports = invCont;
