@@ -185,3 +185,47 @@ nav ul li a {
 .single-description {
   padding: .7rem;
 }
+
+/*---------- LOG IN FORM ----------*/
+#login-form {
+  text-align: center;
+}
+form {
+  margin: 2rem 0;
+  border: 1px solid var(--secondary-color);
+  background-color: var(--primary-color);
+  border-radius: 4px;
+  padding: 1.5rem 2rem;
+  max-width: 500px;
+}
+form label.top {
+  display: block;
+  margin: 0.1rem 0;
+  font-size: 1rem;
+  text-align: left;
+}
+input {
+  display: block;
+  font-size: 0.9rem;
+  border: 1px solid var(--secondary-color);
+  border-radius: 4px;
+  padding: .45rem 1.5rem;
+  width: 100%;
+  margin-bottom: 1.2rem;
+}
+form .submitBtn {
+  border: none;
+  border-radius: 20px;
+  padding: .45rem 1.5rem;
+  margin: 0 0 .2rem 2%;
+  width: 20%;
+  font-size: 1rem;
+  color: black;
+}
+.submitBtn:hover {
+  background-color: var(--secondary-color);
+  color: white;
+}
+.registerBtn {
+  font-size: 1.1rem;
+}
