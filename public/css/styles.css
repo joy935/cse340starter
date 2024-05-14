@@ -55,6 +55,11 @@ nav ul li a {
   text-decoration: none;
   color: var(--third-color)
 }
+/*----- flash message -----*/
+#messages .notice {
+  color: red;
+  font-weight: bold;
+}
 /*----- hero -----*/
 #hero {
   display: flex;
