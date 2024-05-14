@@ -33,7 +33,7 @@ app.use(static)
 app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", inventoryRoute)
-// Error route
+// Intentional error route
 app.get('/broken-link', errController.generateError);
 app.use(errorMiddleware);
 // File Not Found Route - must be last route in list
