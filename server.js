@@ -55,7 +55,7 @@ app.get("/", utilities.handleErrors(baseController.buildHome))
 // Inventory routes
 app.use("/inv", inventoryRoute)
 // Account routes
-app.use("/account", accountRoute)
+app.use("/account", require("./routes/accountRoute"))
 // Intentional error route
 app.get('/broken-link', errController.generateError);
 app.use(errorMiddleware);
