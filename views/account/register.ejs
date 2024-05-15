@@ -1,0 +1,23 @@
+<h1><%= title %></h1>
+<div>
+    <%- messages() %>
+</div>
+<form id="login-form" action="/account/register" method="post">
+    <div>
+        <label class="top" for="first_name">First Name</label>
+        <input type="text" id="first_name" name="account_firstname" required>
+    </div>
+    <div>
+        <label class="top" for="last_name">Last Name</label>
+        <input type="text" id="last_name" name="account_lastname" required>
+    </div>
+    <div>
+        <label class="top" for="email">Email</label>
+        <input type="email" id="email" name="account_email" required>
+    </div>
+    <div>
+        <label class="top" for="password">Password</label>
+        <input type="password" id="password" name="account_password" required>
+    </div>
+    <button class="submitBtn" type="submit">Register</button>
+</form>
