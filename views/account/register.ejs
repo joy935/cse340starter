@@ -17,7 +17,7 @@
     </div>
     <div>
         <label class="top" for="password">Password</label>
-        <input type="password" id="password" name="account_password" required>
+        <input type="password" id="password" name="account_password" pattern="[A-Za-z0-9].{12,}" placeholder="At least 12 characters long" required>
     </div>
     <button class="registerBtn" type="submit">Register</button>
 </form>
