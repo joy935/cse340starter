@@ -9,6 +9,7 @@ async function buildLogin(req, res, next) {
     res.render("account/login", {
       title: "Login",
       nav,
+      errors: null,
     })
   }
   
@@ -55,4 +56,28 @@ async function registerAccount(req, res) {
   }
 }
 
-  module.exports = { buildLogin, buildRegister, registerAccount}
+/* ****************************************
+*  Process Login
+* *************************************** */
+async function loginAccount(req, res) {
+  let nav = await utilities.getNav()
+  const { account_email, account_password } = req.body
+
+  const loginResult = await accountModel.loginAccount(account_email, account_password)
+
+  if (loginResult) {
+    req.flash("notice", `Welcome back ${loginResult.account_firstname}`)
+    res.status(200).render("index", {
+      title: "Home",
+      nav,
+    })
+  } else {
+    req.flash("notice", "Sorry, the login failed.")
+    res.status(401).render("account/login", {
+      title: "Login",
+      nav,
+    })
+  }
+}
+
+  module.exports = { buildLogin, buildRegister, registerAccount, loginAccount}
