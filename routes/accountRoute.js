@@ -19,12 +19,15 @@ router.post(
     utilities.handleErrors(accountController.registerAccount)
 )
 
-// Process the login attempt
+// Route to handle the login form submission
 router.post(
     "/login",
+    regValidate.loginRules(),
+    regValidate.checkLoginData,
+    // utilities.handleErrors(accountController.loginAccount),
     (req, res) => {
-      res.status(200).send('login process')
-    }
-  )
-  
+        res.status(200).send('login process')
+      }
+)
+
 module.exports = router;
