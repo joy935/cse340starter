@@ -1,5 +1,6 @@
 const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
+// const bcrypt = require("bcryptjs")
 
 const invCont = {}
 
@@ -45,6 +46,30 @@ invCont.buildManagementView = async function (req, res, next) {
   res.render("./inventory/management", {
     title: "Vehicle Management",
     nav,
+  })
+}
+
+/* ***************************
+*  Build add classification view
+* ************************** */
+invCont.buildAddClassificationView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-classification", {
+    title: "Add New Classification",
+    nav,
+    // errors: null,
+  })
+}
+
+/* ***************************
+*  Build add vehicle view
+* ************************** */
+invCont.buildAddVehicleView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/add-inventory", {
+    title: "Add New Vehicle",
+    nav,
+    // errors: null,
   })
 }
 
