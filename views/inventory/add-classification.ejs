@@ -2,3 +2,12 @@
 <div>
     <%- messages() %>
 </div>
+<form id="addNewClassification" method="post" action="/inv/type">
+        <p>Field is required</p>
+        <div>
+            <label class="top" for="classification_name">Classification Name</label>
+            <span class="direction">Name must be alphabetic characters only.</span>
+            <input type="text" id="classification_name" name="classification_name" patter="[A-Za-z]" required>
+        </div>
+        <button id="addClassficationBtn" type="submit">Add Classification</button>
+</form>
