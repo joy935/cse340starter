@@ -37,4 +37,15 @@ invCont.buildBySingleId = async function (req, res, next) {
   });
 }
 
+/* ***************************
+*  Build vehicle management view
+* ************************** */
+invCont.buildManagementView = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  res.render("./inventory/management", {
+    title: "Vehicle Management",
+    nav,
+  })
+}
+
 module.exports = invCont;
