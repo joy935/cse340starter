@@ -54,7 +54,7 @@ async function registerAccount(req, res) {
     hashedPassword
   )
 
-  if (regResult) {
+  if (regResult.rowCount > 0) {
     req.flash(
       "notice",
       `Congratulations, you\'re registered ${account_firstname}. Please log in.`
@@ -68,8 +68,9 @@ async function registerAccount(req, res) {
     res.status(501).render("account/register", {
       title: "Registration",
       nav,
+      errors: null,
     })
   }
 }
 
-  module.exports = { buildLogin, buildRegister, registerAccount}
+  module.exports = { buildLogin, buildRegister, registerAccount }
