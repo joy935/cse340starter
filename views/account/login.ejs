@@ -2,13 +2,6 @@
 <div>
     <%- messages() %>
 </div>
-<% if (errors) { %>
-    <ul class="notice">
-   <% errors.array().forEach(error => { %>
-     <li><%= error.msg %></li>
-  <%  }) %>
-   </ul>
-<% } %>
 <form id="login-form" action="/account/login" method="post">
     <div>
         <label class="top" for="email">Email</label>
