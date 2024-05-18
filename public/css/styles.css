@@ -187,10 +187,10 @@ nav ul li a {
 }
 
 /*---------- LOG IN FORM ----------*/
-#login-form, #register-form {
+#login-form, #register-form, #addClassification-form, #addInventory-form {
   text-align: center;
 }
-#login-form {
+#login-form, #addClassification-form, #addInventory-form {
   margin: 2rem 0;
   border: 1px solid var(--secondary-color);
   background-color: var(--primary-color);
@@ -222,7 +222,7 @@ form .submitBtn {
   font-size: 1rem;
   color: black;
 }
-.submitBtn:hover {
+.submitBtn:hover, #addClassficationBtn:hover, #addVehicleBtn:hover {
   background-color: var(--secondary-color);
   color: white;
 }
@@ -281,4 +281,29 @@ span#pswdBtnReg {
   margin: 0 0 .2rem 2%;
   width: 42%;
   font-size: 1rem;
+}
+/*---------- VEHICULE MANAGEMENT PAGE ----------*/
+.linkNew {
+  padding-left: 2rem;
+}
+
+/*---------- ADD CLASSIFICATION PAGE ----------*/
+#addClassficationBtn, #addVehicleBtn {
+  border: none;
+  border-radius: 20px;
+  padding: .45rem 1.5rem;
+  margin: 0 0 .2rem 2%;
+  width: 50%;
+  font-size: 1rem;
+  color: black;
+}
+.direction {
+  display: block;
+  text-align: left;
+  font-weight: lighter;
+}
+.requiredFields {
+  display: block;
+  text-align: left;
+  font-weight: bold;
 }
