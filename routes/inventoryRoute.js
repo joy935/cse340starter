@@ -29,5 +29,11 @@ router.post(
 router.get("/detail", invController.buildAddVehicle);
 
 // Route to handle the add new vehicle form submission
+router.post(
+    "/detail",
+    invValidate.vehicleRules(),
+    invValidate.checkVehicleData,
+    utilities.handleErrors(invController.addVehicle)
+);
 
 module.exports = router;
