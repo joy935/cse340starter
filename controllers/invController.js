@@ -1,6 +1,5 @@
-const invModel = require("../models/inventory-model")
 const utilities = require("../utilities/")
-// const bcrypt = require("bcryptjs")
+const invModel = require("../models/inventory-model")
 
 const invCont = {}
 
@@ -52,25 +51,44 @@ invCont.buildManagementView = async function (req, res, next) {
 /* ***************************
 *  Build add classification view
 * ************************** */
-invCont.buildAddClassificationView = async function (req, res, next) {
+invCont.buildAddClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
   res.render("./inventory/add-classification", {
     title: "Add New Classification",
     nav,
-    // errors: null,
+    errors: null,
   })
 }
 
 /* ***************************
-*  Build add vehicle view
+*  Process add new classification form submission
 * ************************** */
-invCont.buildAddVehicleView = async function (req, res, next) {
+invCont.addClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
-  res.render("./inventory/add-inventory", {
-    title: "Add New Vehicle",
-    nav,
-    // errors: null,
-  })
+  const { classification_name } = req.body
+
+  const result = await invModel.addClassification(
+    classification_name
+  )
+
+  if (result.rowCount > 0) {
+    req.flash(
+      "notice",
+      `The new ${classification_name} was successfully added.`
+    )
+    res.status(201).render("inventory/management", {
+      title: "Vehicule Management",
+      nav,
+      errors: null,
+    })
+  } else {
+    req.flash("notice", "Sorry, there was an error adding the classification.")
+    res.status(501).render("inventory/add-classification", {
+      title: "Add New Classification",
+      nav,
+      errors: null,
+    })
+  }
 }
 
 module.exports = invCont;
