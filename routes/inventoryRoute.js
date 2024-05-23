@@ -36,7 +36,11 @@ router.post(
     utilities.handleErrors(invController.addVehicle)
 );
 
-// Route to build the update vehicle view
+// Route to build the management vehicle view classification table
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
+
+
+// Route to update a vehicle or inventory
+router.get("/edit/:singleId", utilities.handleErrors(invController.updateVehicle));
 
 module.exports = router;
