@@ -30,4 +30,7 @@ router.post(
     utilities.handleErrors(accountController.accountLogin)
 )
 
+// Route to build the account management view
+router.get("/", accountController.buildAccounManagement)
+
 module.exports = router;
