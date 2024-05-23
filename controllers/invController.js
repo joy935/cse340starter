@@ -173,4 +173,35 @@ invCont.getInventoryJSON = async (req, res, next) => {
   }
 }
 
+/* ***************************
+ *  Update Vehicle or inventory
+ * ************************** */
+invCont.updateVehicle = async (req, res, next) => {
+  const singleId = parseInt(req.params.singleId)
+  const vehicule = await invModel.getVehiculeById(singleId)
+  const classificationList = await utilities.buildClassificationList(
+    vehicule.classification_id
+  )
+  const vehiculeName = `${vehicule.inv_make} ${vehicule.inv_model}`
+  let nav = await utilities.getNav()
+
+  res.render("./inventory/edit-inventory", {
+    title: "Edit" + vehiculeName,
+    nav,
+    classificationList,
+    errors: null,
+    inv_id: vehicule.inv_id,
+    inv_make: vehicule.inv_make,
+    inv_model: vehicule.inv_model,
+    inv_year: vehicule.inv_year,
+    inv_description: vehicule.inv_description,
+    inv_image: vehicule.inv_image,
+    inv_thumbnail: vehicule.inv_thumbnail,
+    inv_price: vehicule.inv_price,
+    inv_miles: vehicule.inv_miles,
+    inv_color: vehicule.inv_color,
+    classification_id: vehicule.classification_id
+  })
+}
+
 module.exports = invCont;
