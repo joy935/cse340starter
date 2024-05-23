@@ -34,7 +34,6 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
 }))
-app.use(cookieParser())
 // Express Messages Middleware
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
@@ -44,6 +43,10 @@ app.use(function(req, res, next){
 // Body Parser Middleware
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true })) // for parsing application/x-www-form-urlencoded
+// Cockie Parser Middleware
+app.use(cookieParser())
+// Middleware to check token validity
+app.use(utilities.checkJWTToken)
 
 /* ***********************
  * View Engine and Templates
