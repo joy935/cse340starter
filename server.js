@@ -5,6 +5,7 @@
 /* ***********************
  * Require Statements
  *************************/
+const cookieParser = require("cookie-parser")
 const express = require("express")
 const expressLayouts = require("express-ejs-layouts")
 const env = require("dotenv").config()
@@ -33,6 +34,7 @@ app.use(session({
   saveUninitialized: true,
   name: 'sessionId',
 }))
+app.use(cookieParser())
 // Express Messages Middleware
 app.use(require('connect-flash')())
 app.use(function(req, res, next){
