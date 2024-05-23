@@ -24,10 +24,10 @@ router.post(
     "/login",
     regValidate.loginRules(),
     regValidate.checkLoginData,
-    // utilities.handleErrors(accountController.loginAccount),
-    (req, res) => {
-        res.status(200).send('login process')
-      }
+    // (req, res) => {
+    //     res.status(200).send('login process')
+    //   } remove this arrow function
+    utilities.handleErrors(accountController.accountLogin)
 )
 
 module.exports = router;
