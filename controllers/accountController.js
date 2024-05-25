@@ -102,7 +102,7 @@ async function accountLogin(req, res) {
      } else {
        res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
      }
-   return res.redirect("/account")
+   return res.redirect("/account/management")
    }
   } catch (error) {
    return new Error('Access Forbidden')
@@ -115,7 +115,7 @@ async function accountLogin(req, res) {
 async function buildAccounManagement(req, res) {
   let nav = await utilities.getNav()
   res.render("account/account-management", {
-    title: "You're logged in",
+    title: "Account Management",
     nav,
     errors: null,
   })
