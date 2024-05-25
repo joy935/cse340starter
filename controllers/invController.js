@@ -135,14 +135,14 @@ invCont.addVehicle = async function (req, res, next) {
       "notice",
       `This ${inv_make} ${inv_model} was successfully added.`
     )
-    res.status(201).render("inventory/management", {
+    res.status(201).render("./inventory/management", { // relative or absolute path?
       title: "Vehicle Management",
       nav,
       errors: null,
     })
   } else {
     req.flash("notice", "Sorry, there was an error adding this vehicle.")
-    res.status(501).render("inventory/add-inventory", {
+    res.status(501).render("./inventory/add-inventory", { // relative or absolute path?
       title: "Add a New Vehicle",
       nav,
       errors: null,
@@ -271,7 +271,7 @@ invCont.buildDeleteVehicle = async (req, res, next) => {
   const vehiculeName = `${vehicule.inv_make} ${vehicule.inv_model}`
   let nav = await utilities.getNav()
 
-  res.render("./inventory/delete-confirm", {
+  res.render("./inventory/delete-confirm", { // relative or absolute path?
     title: "Delete" + vehiculeName,
     nav,
     classificationList,
@@ -281,7 +281,7 @@ invCont.buildDeleteVehicle = async (req, res, next) => {
     inv_model: vehicule.inv_model,
     inv_year: vehicule.inv_year,
     inv_price: vehicule.inv_price,
-    classification_id: vehicule.classification_id
+    // classification_id: vehicule.classification_id
   })
 }
 
@@ -308,7 +308,7 @@ invCont.deleteInventory = async function (req, res, next) {
     classification_id, )
 
   if (deleteResult) { 
-    const vehicleName = `${deleteResult.inv_make} ${deleteResult.inv_model}`
+    const vehicleName = `${inv_make} ${inv_model}`
     req.flash(
       "notice",
       `This ${vehicleName} was successfully deleted.`
@@ -319,8 +319,8 @@ invCont.deleteInventory = async function (req, res, next) {
       classification_id
     )
     const vehicleName = `${inv_make} ${inv_model}`
-    req.flash("notice", "Sorry, the insert failed.")
-    res.status(501).render("inventory/delete-confirm", {
+    req.flash("notice", "Sorry, the delete failed.")
+    res.status(501).render("./inventory/delete-confirm", {
       title: "Delete" + vehicleName,
       nav,
       classificationList,
@@ -329,7 +329,7 @@ invCont.deleteInventory = async function (req, res, next) {
       inv_model,
       inv_price,
       inv_year,
-      classification_id,
+      // classification_id,
     })
     }
 }
