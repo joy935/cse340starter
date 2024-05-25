@@ -9,7 +9,7 @@
   <%  }) %>
    </ul>
 <% } %>
-<form id="updateInventory-form" method="post" action="/inv/update">
+<form id="updateForm" method="post" action="/inv/update">
     <p class="requiredFields">Fields are required.</p>
     <div>
         <label id="topLabel" class="top" for="classification_name">Classification
@@ -52,9 +52,11 @@
         <label class="top" for="inv_color">Color</label>
         <input type="text" id="inv_color" name="inv_color" value="<%= locals.inv_color %>" required>
     </div>
-    <button id="updateVehicleBtn" type="submit">Update Vehicle</button>
+    <button id="updateVehicleBtn" type="submit" disabled>Update Vehicle</button>
 
     <input type="hidden" name="inv_id"
     <% if(locals.inv_id) { %> value="<%= locals.inv_id %>"
     <% } %>>
 </form>
+
+<script src="/js/inv-update.js"></script>
