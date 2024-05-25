@@ -79,7 +79,7 @@ async function getClassifications(){
   }
 
 /* ***************************
-* Get all inventory items by classification_id
+* Add new vehicle or inventory
 * ************************** */
 async function addVehicle(classification_id, inv_make, 
   inv_model, inv_description, 
@@ -109,4 +109,58 @@ async function addVehicle(classification_id, inv_make,
   }
 }
 
-module.exports = {getClassifications, getInventoryByClassificationId, getVehiculeById, addClassification, checkExistingClassification, getClassifications, addVehicle};
+/* ***************************
+* Update vehicle or inventory data
+* ************************** */
+async function updateInventory(
+  inv_id, inv_make, 
+  inv_model, inv_description, 
+  inv_image, inv_thumbnail, 
+  inv_price, inv_year, 
+  inv_miles, inv_color,
+  classification_id, ){
+
+  try {
+    // const sql = `UPDATE inventory 
+    // SET classification_id = $1, 
+    // inv_make = $2, inv_model = $3, 
+    // inv_description = $4, inv_image = $5, 
+    // inv_thumbnail = $6, inv_price = $7, 
+    // inv_year = $8, inv_miles = $9, 
+    // inv_color = $10
+    // WHERE inv_id = $11 RETURNING *`
+    const sql = "UPDATE inventory SET inv_make = $1, inv_model = $2, inv_description = $3, inv_image = $4, inv_thumbnail = $5, inv_price = $6, inv_year = $7, inv_miles = $8, inv_color = $9, classification_id = $10 WHERE inv_id = $11 RETURNING *"
+    
+    // const data = await pool.query(sql, [
+    //   classification_id,
+    //   inv_make,
+    //   inv_model,
+    //   inv_description,
+    //   inv_image,
+    //   inv_thumbnail,
+    //   inv_price,
+    //   inv_year,
+    //   inv_miles,
+    //   inv_color,
+    //   inv_id
+    // ])
+    const data = await pool.query(sql, [
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_year,
+      inv_miles,
+      inv_color,
+      classification_id,
+      inv_id
+    ])
+    return data.rows[0]
+  } catch (error) {
+    console.error("model error: " + error)
+  }
+}
+
+module.exports = {getClassifications, getInventoryByClassificationId, getVehiculeById, addClassification, checkExistingClassification, getClassifications, addVehicle, updateInventory};
