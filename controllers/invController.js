@@ -67,6 +67,7 @@ invCont.buildAddClassification = async function (req, res, next) {
 * ************************** */
 invCont.addClassification = async function (req, res, next) {
   let nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList()
   const { classification_name } = req.body
 
   const result = await invModel.addClassification(
@@ -82,6 +83,7 @@ invCont.addClassification = async function (req, res, next) {
       title: "Vehicule Management",
       nav,
       errors: null,
+      classificationList,
     })
   } else {
     req.flash("notice", "Sorry, there was an error adding the classification.")
@@ -116,6 +118,7 @@ invCont.buildAddVehicle = async function (req, res, next) {
  * ************************** */
 invCont.addVehicle = async function (req, res, next) {
   let nav = await utilities.getNav()
+  const classificationList = await utilities.buildClassificationList()
   const {
     classification_id, inv_make, 
     inv_model, inv_description, 
@@ -135,17 +138,19 @@ invCont.addVehicle = async function (req, res, next) {
       "notice",
       `This ${inv_make} ${inv_model} was successfully added.`
     )
-    res.status(201).render("./inventory/management", { // relative or absolute path?
+    res.status(201).render("inventory/management", { // relative or absolute path?
       title: "Vehicle Management",
       nav,
       errors: null,
+      classificationList,
     })
   } else {
     req.flash("notice", "Sorry, there was an error adding this vehicle.")
-    res.status(501).render("./inventory/add-inventory", { // relative or absolute path?
+    res.status(501).render("inventory/add-inventory", { // relative or absolute path?
       title: "Add a New Vehicle",
       nav,
       errors: null,
+      classificationList
     })
     }
 }
