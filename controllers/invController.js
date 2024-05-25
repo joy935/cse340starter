@@ -124,18 +124,13 @@ invCont.addVehicle = async function (req, res, next) {
     inv_miles, inv_color } = req.body
 
   const resVehicle = await invModel.addVehicle(
-    classification_id, 
-    inv_make,
-    inv_model, 
-    inv_description, 
-    inv_image, 
-    inv_thumbnail, 
-    inv_price,
-    inv_year, 
-    inv_miles, 
-    inv_color)
+    classification_id, inv_make,
+    inv_model, inv_description, 
+    inv_image, inv_thumbnail, 
+    inv_price, inv_year, 
+    inv_miles, inv_color)
 
-  if (resVehicle.rowCount > 0) { // adjust if needed
+  if (resVehicle) { // adjust if needed
     req.flash(
       "notice",
       `This ${inv_make} ${inv_model} was successfully added.`
@@ -294,44 +289,26 @@ invCont.buildDeleteVehicle = async (req, res, next) => {
  *  Process delete vehicle or inventory data
  * ************************** */
 invCont.deleteInventory = async function (req, res, next) {
-
-  const singleId = parseInt(req.params.singleId)
-  const vehicule = await invModel.getVehiculeById(singleId)
-  const classificationList = await utilities.buildClassificationList(
-    vehicule.classification_id
-  )
-  const vehiculeName = `${vehicule.inv_make} ${vehicule.inv_model}`
-
   let nav = await utilities.getNav()
   const {
-    inv_id,
-    inv_make, 
-    inv_model, 
-    inv_description, 
-    inv_image,
-    inv_thumbnail, 
-    inv_price, 
-    inv_year, 
-    inv_miles, 
-    inv_color,
+    inv_id, inv_make, 
+    inv_model, inv_description, 
+    inv_image, inv_thumbnail, 
+    inv_price, inv_year, 
+    inv_miles, inv_color,
     classification_id, 
   } = req.body
 
-  const updateResult = await invModel.deleteInventory(
-    inv_id,
-    inv_make,
-    inv_model, 
-    inv_description, 
-    inv_image, 
-    inv_thumbnail, 
-    inv_price,
-    inv_year, 
-    inv_miles, 
-    inv_color,
+  const deleteResult = await invModel.deleteInventory(
+    inv_id, inv_make,
+    inv_model, inv_description, 
+    inv_image, inv_thumbnail, 
+    inv_price, inv_year, 
+    inv_miles, inv_color,
     classification_id, )
 
-  if (updateResult) { 
-    const vehicleName = `${updateResult.inv_make} ${updateResult.inv_model}`
+  if (deleteResult) { 
+    const vehicleName = `${deleteResult.inv_make} ${deleteResult.inv_model}`
     req.flash(
       "notice",
       `This ${vehicleName} was successfully deleted.`
