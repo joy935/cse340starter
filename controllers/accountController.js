@@ -121,4 +121,19 @@ async function buildAccounManagement(req, res) {
   })
 }
 
-  module.exports = { buildLogin, buildRegister, registerAccount, accountLogin, buildAccounManagement }
+/* ****************************************
+* Build Update Account View
+* *************************************** */
+async function buildUpdateAccount(req, res) {
+  let nav = await utilities.getNav()
+  res.render("account/update", {
+    title: "Edit Account",
+    nav,
+    errors: null,
+  })
+}
+
+  module.exports = { 
+    buildLogin, accountLogin,
+    buildRegister, registerAccount, 
+    buildAccounManagement, buildUpdateAccount}
