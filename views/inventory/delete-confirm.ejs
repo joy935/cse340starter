@@ -12,11 +12,6 @@
 <form id="deleteForm" method="post" action="/inv/delete">
     <p>Confirm Deletion -  The delete is permanent</p>
     <div>
-        <label id="topLabel" class="top" for="classification_name">Classification
-            <%- classificationList %>
-        </label>
-    </div>
-    <div>
         <label class="top" for="inv_make">Make</label>
         <input type="text" id="inv_make" name="inv_make" placeholder="Min of 3 characters" pattern=".{3,}" value="<%= locals.inv_make %>" readonly required>
     </div>
