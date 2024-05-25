@@ -117,16 +117,11 @@ invCont.buildAddVehicle = async function (req, res, next) {
 invCont.addVehicle = async function (req, res, next) {
   let nav = await utilities.getNav()
   const {
-    classification_id, 
-    inv_make, 
-    inv_model, 
-    inv_description, 
-    inv_image,
-    inv_thumbnail, 
-    inv_price, 
-    inv_year, 
-    inv_miles, 
-    inv_color } = req.body
+    classification_id, inv_make, 
+    inv_model, inv_description, 
+    inv_image, inv_thumbnail, 
+    inv_price, inv_year, 
+    inv_miles, inv_color } = req.body
 
   const resVehicle = await invModel.addVehicle(
     classification_id, 
@@ -264,6 +259,99 @@ invCont.updateInventory = async function (req, res, next) {
       inv_miles,
       inv_year,
       inv_color,
+      classification_id,
+    })
+    }
+}
+
+/* ***************************
+ *  Build delete Vehicle or inventory view
+ * ************************** */
+invCont.buildDeleteVehicle = async (req, res, next) => {
+  const singleId = parseInt(req.params.singleId)
+  const vehicule = await invModel.getVehiculeById(singleId)
+  const classificationList = await utilities.buildClassificationList(
+    vehicule.classification_id
+  )
+  const vehiculeName = `${vehicule.inv_make} ${vehicule.inv_model}`
+  let nav = await utilities.getNav()
+
+  res.render("./inventory/delete-confirm", {
+    title: "Delete" + vehiculeName,
+    nav,
+    classificationList,
+    errors: null,
+    inv_id: vehicule.inv_id,
+    inv_make: vehicule.inv_make,
+    inv_model: vehicule.inv_model,
+    inv_year: vehicule.inv_year,
+    inv_price: vehicule.inv_price,
+    classification_id: vehicule.classification_id
+  })
+}
+
+/* ***************************
+ *  Process delete vehicle or inventory data
+ * ************************** */
+invCont.deleteInventory = async function (req, res, next) {
+
+  const singleId = parseInt(req.params.singleId)
+  const vehicule = await invModel.getVehiculeById(singleId)
+  const classificationList = await utilities.buildClassificationList(
+    vehicule.classification_id
+  )
+  const vehiculeName = `${vehicule.inv_make} ${vehicule.inv_model}`
+
+  let nav = await utilities.getNav()
+  const {
+    inv_id,
+    inv_make, 
+    inv_model, 
+    inv_description, 
+    inv_image,
+    inv_thumbnail, 
+    inv_price, 
+    inv_year, 
+    inv_miles, 
+    inv_color,
+    classification_id, 
+  } = req.body
+
+  const updateResult = await invModel.deleteInventory(
+    inv_id,
+    inv_make,
+    inv_model, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price,
+    inv_year, 
+    inv_miles, 
+    inv_color,
+    classification_id, )
+
+  if (updateResult) { 
+    const vehicleName = `${updateResult.inv_make} ${updateResult.inv_model}`
+    req.flash(
+      "notice",
+      `This ${vehicleName} was successfully deleted.`
+    )
+    res.redirect("/inv/")
+  } else {
+    const classificationList = await utilities.buildClassificationList(
+      classification_id
+    )
+    const vehicleName = `${inv_make} ${inv_model}`
+    req.flash("notice", "Sorry, the insert failed.")
+    res.status(501).render("inventory/delete-confirm", {
+      title: "Delete" + vehicleName,
+      nav,
+      classificationList,
+      errors: null,
+      inv_make,
+      inv_model,
+      inv_price,
+      inv_year,
       classification_id,
     })
     }
