@@ -50,4 +50,10 @@ router.post(
     invValidate.checkUpdateVehicleData,
     utilities.handleErrors(invController.updateInventory))
 
+// Route to build the view of the delete a vehicle or inventory
+router.get("/delete/:singleId", utilities.handleErrors(invController.buildDeleteVehicle));
+
+// Route to handle the delete a vehicle or inventory
+router.post("/delete/", utilities.handleErrors(invController.deleteInventory));
+
 module.exports = router;
