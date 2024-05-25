@@ -33,7 +33,12 @@ router.post(
 // Route to build the account management view
 router.get(
     "/management", 
-    // utilities.checkLogin,
     utilities.handleErrors(accountController.buildAccounManagement))
+
+// Route to build the update account view
+router.get(
+    "/update",
+    utilities.handleErrors(accountController.buildUpdateAccount)
+)
 
 module.exports = router;
