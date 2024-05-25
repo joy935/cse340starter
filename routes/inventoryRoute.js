@@ -40,7 +40,14 @@ router.post(
 router.get("/getInventory/:classification_id", utilities.handleErrors(invController.getInventoryJSON));
 
 
-// Route to update a vehicle or inventory
-router.get("/edit/:singleId", utilities.handleErrors(invController.updateVehicle));
+// Route to build the view of the update a vehicle or inventory
+router.get("/edit/:singleId", utilities.handleErrors(invController.buildUpdateVehicle));
+
+// Route to  handle update a vehicle or inventory
+router.post(
+    "/update/", 
+    invValidate.vehicleRules(),
+    invValidate.checkUpdateVehicleData,
+    utilities.handleErrors(invController.updateInventory))
 
 module.exports = router;
