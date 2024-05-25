@@ -2,6 +2,7 @@
 <div>
     <%- messages() %>
 </div>
+
 <% if (errors) { %>
     <ul class="notice">
    <% errors.array().forEach(error => { %>
@@ -9,3 +10,17 @@
   <%  }) %>
    </ul>
 <% } %>
+
+<% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
+    <h2>Welcome <%= locals.accountData.account_firstname %></h2>
+<% } else { %>
+    <h2>Welcome Basic</h2> 
+<% } %>
+
+<p>You're logged in</p>
+
+<a href="/account/...">Edit Account Information</a> <!-- modify href -->
+
+<% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
+    <h2>Inventory Management</h2>
+    <a href="/inv/">Manage Inventory</a> <% } %>
