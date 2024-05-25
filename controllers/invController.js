@@ -174,9 +174,9 @@ invCont.getInventoryJSON = async (req, res, next) => {
 }
 
 /* ***************************
- *  Update Vehicle or inventory
+ *  Build update Vehicle or inventory view
  * ************************** */
-invCont.updateVehicle = async (req, res, next) => {
+invCont.buildUpdateVehicle = async (req, res, next) => {
   const singleId = parseInt(req.params.singleId)
   const vehicule = await invModel.getVehiculeById(singleId)
   const classificationList = await utilities.buildClassificationList(
@@ -202,6 +202,71 @@ invCont.updateVehicle = async (req, res, next) => {
     inv_color: vehicule.inv_color,
     classification_id: vehicule.classification_id
   })
+}
+
+/* ***************************
+ *  Process update vehicle or inventory data
+ * ************************** */
+invCont.updateInventory = async function (req, res, next) {
+  let nav = await utilities.getNav()
+  const {
+    inv_id,
+    inv_make, 
+    inv_model, 
+    inv_description, 
+    inv_image,
+    inv_thumbnail, 
+    inv_price, 
+    inv_year, 
+    inv_miles, 
+    inv_color,
+    classification_id, 
+  } = req.body
+
+  const updateResult = await invModel.updateInventory(
+    inv_id,
+    inv_make,
+    inv_model, 
+    inv_description, 
+    inv_image, 
+    inv_thumbnail, 
+    inv_price,
+    inv_year, 
+    inv_miles, 
+    inv_color,
+    classification_id, )
+
+  if (updateResult) { 
+    const vehicleName = `${updateResult.inv_make} ${updateResult.inv_model}`
+    req.flash(
+      "notice",
+      `This ${vehicleName} was successfully updated.`
+    )
+    res.redirect("/inv/")
+  } else {
+    const classificationList = await utilities.buildClassificationList(
+      classification_id
+    )
+    const vehicleName = `${inv_make} ${inv_model}`
+    req.flash("notice", "Sorry, the insert failed.")
+    res.status(501).render("inventory/edit-inventory", {
+      title: "Edit" + vehicleName,
+      nav,
+      classificationList,
+      errors: null,
+      inv_id,
+      inv_make,
+      inv_model,
+      inv_description,
+      inv_image,
+      inv_thumbnail,
+      inv_price,
+      inv_miles,
+      inv_year,
+      inv_color,
+      classification_id,
+    })
+    }
 }
 
 module.exports = invCont;
