@@ -17,7 +17,6 @@ router.get("/", invController.buildManagementView);
 
 // Route to build the add new classification view
 router.get("/type", invController.buildAddClassification);
-
 // Route to handle the add new classification form submission
 router.post(
     "/type", 
@@ -25,9 +24,9 @@ router.post(
     invValidate.checkClassificationData,
     utilities.handleErrors(invController.addClassification)
 );
+
 // Route to build the add new vehicle view
 router.get("/detail", invController.buildAddVehicle);
-
 // Route to handle the add new vehicle form submission
 router.post(
     "/detail",
@@ -42,7 +41,6 @@ router.get("/getInventory/:classification_id", utilities.handleErrors(invControl
 
 // Route to build the view of the update a vehicle or inventory
 router.get("/edit/:singleId", utilities.handleErrors(invController.buildUpdateVehicle));
-
 // Route to  handle update a vehicle or inventory
 router.post(
     "/update/", 
@@ -52,7 +50,6 @@ router.post(
 
 // Route to build the view of the delete a vehicle or inventory
 router.get("/delete/:singleId", utilities.handleErrors(invController.buildDeleteVehicle));
-
 // Route to handle the delete a vehicle or inventory
 router.post("/delete/", utilities.handleErrors(invController.deleteInventory));
 
