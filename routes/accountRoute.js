@@ -39,14 +39,14 @@ router.get(
 )
 // Route to handle the update account form submission
 router.post(
-    "/update",
+    "/updateAccount",
     regValidate.updateRules(),
     regValidate.checkUpdateData,
     utilities.handleErrors(accountController.updateAccount)
 )
 // Route to handle the update password form submission
 router.post(
-    "/update-password",
+    "/updatePassword",
     regValidate.updatePasswordRules(),
     regValidate.checkUpdatePasswordData,
     utilities.handleErrors(accountController.updatePassword)
