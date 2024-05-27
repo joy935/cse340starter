@@ -219,16 +219,21 @@ validate.updatePasswordRules = () => {
   * Check data and return errors or continue to update password
   * ***************************** */
 validate.checkUpdatePasswordData = async (req, res, next) => {
-    const { account_password } = req.body
+    const { account_firstname, account_lastname, account_email, account_id } = req.body
+    const accountId = parseInt(req.body.account_id)
+    const accountData = await accountModel.getAccountByAccountId(accountId)
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
-      res.render("account/update", {
+      res.render("account/update/" + accountData.account_id, {
         errors,
         title: "Edit Account",
         nav,
-        account_password,
+        account_firstname: accountData.account_firstname,
+        account_lastname: accountData.account_lastname,
+        account_email: accountData.account_email,
+        account_id: accountData.account_id,
       })
       return
     }
