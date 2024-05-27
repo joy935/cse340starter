@@ -164,17 +164,22 @@ async function updateAccount(req, res) {
       } else {
         res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
       }
+
+      //update session data
+      req.session.account = account
+
       req.flash("notice", "Congratulations, your information has been updated.")
       return res.redirect("/account/management")
+
     } catch (error) {
       req.flash("notice", "Error updating account. Please try again.");
-      return res.status(403).redirect("/account/update");
+      return res.status(403).redirect("/account/update/" + account.account_id);
     }
   } else {
     req.flash("notice", "Account update failed.")
     const accountId = parseInt(req.params.account_id)
     const account = await accountModel.getAccountByAccountId(accountId)
-    res.status(501).render("account/update", {
+    res.status(501).render("account/update/" + account.account_id, {
       title: "Edit Account",
       nav,
       errors: null,
@@ -211,16 +216,12 @@ async function updatePassword(req, res) {
   }
 
   const accountId = parseInt(req.body.account_id)
-  const accountData = await accountModel.updatePassword(account)
-  const account = await accountModel.getAccountByAccountId(accountId)
-  å
-  if (accountData) {
+  const accountData = await accountModel.getAccountByAccountId(accountId)
+  const resultData = await accountModel.updatePassword(hashedPassword, accountId)
+
+  if (resultData) {
     req.flash("notice", "Congratulations, your password has been updated.")
-    res.status(200).render("account/account-management", {
-      title: "Account Management",
-      nav,
-      errors: null,
-    })
+    res.redirect("/account/management") 
   } else {
     req.flash("notice", "Password update failed.")
     res.status(501).render("account/update", {
