@@ -24,9 +24,6 @@ router.post(
     "/login",
     regValidate.loginRules(),
     regValidate.checkLoginData,
-    // (req, res) => { remove this arrow function
-    //     res.status(200).send('login process')
-    //   } 
     utilities.handleErrors(accountController.accountLogin)
 )
 
@@ -37,8 +34,22 @@ router.get(
 
 // Route to build the update account view
 router.get(
-    "/update",
+    "/update/:account_id",
     utilities.handleErrors(accountController.buildUpdateAccount)
+)
+// Route to handle the update account form submission
+router.post(
+    "/update",
+    regValidate.updateRules(),
+    regValidate.checkUpdateData,
+    utilities.handleErrors(accountController.updateAccount)
+)
+// Route to handle the update password form submission
+router.post(
+    "/update-password",
+    regValidate.updatePasswordRules(),
+    regValidate.checkUpdatePasswordData,
+    utilities.handleErrors(accountController.updatePassword)
 )
 
 module.exports = router;
