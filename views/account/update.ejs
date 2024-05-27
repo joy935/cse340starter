@@ -10,7 +10,6 @@
    </ul>
 <% } %>
 <form id="updateAccountForm" action="/account/updateAccount/" method="post">
-    <input type="hidden" name="form_type" value="update_account">
     <div>
         <label class="top" for="first_name">First Name</label>
         <input type="text" id="first_name" name="account_firstname" value="<%= locals.account_firstname %>" required>
@@ -32,7 +31,6 @@
 
 <h2>Update Password</h2>
 <form id="updatePswdForm" action="/account/updatePassword/" method="post">
-    <input type="hidden" name="form_type" value="update_password">
     <div>
         <p id="passwordReq">Passwords must be at least 12 characters and contain at least 1 number, 1 capital letter and 1 special character.</p>
         <p>*Note your original password will be changed</p>
