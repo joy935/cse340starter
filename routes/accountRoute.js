@@ -52,4 +52,7 @@ router.post(
     utilities.handleErrors(accountController.updatePassword)
 )
 
+// Route to handle the logout
+router.get("/logout", utilities.handleErrors(accountController.logout))
+
 module.exports = router;
