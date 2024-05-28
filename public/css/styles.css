@@ -18,7 +18,7 @@ body {
   max-width: 900px;
   padding: 10px;
 }
-
+ 
 /*---------- HOMEPAGE ----------*/
 /*----- header -----*/
 header {
@@ -187,10 +187,16 @@ nav ul li a {
 }
 
 /*---------- LOG IN FORM ----------*/
-#login-form, #register-form, #addClassification-form, #addInventory-form {
+#login-form, #register-form, 
+#addClassification-form, #addInventory-form,
+#updateForm,
+#updateAccountForm, #updatePswdForm {
   text-align: center;
 }
-#login-form, #addClassification-form, #addInventory-form {
+#login-form, 
+#addClassification-form, #addInventory-form,
+#updateForm,
+#updateAccountForm, #updatePswdForm {
   margin: 2rem 0;
   border: 1px solid var(--secondary-color);
   background-color: var(--primary-color);
@@ -213,7 +219,7 @@ input {
   width: 100%;
   margin-bottom: 1.2rem;
 }
-form .submitBtn {
+form .submitBtn{
   border: none;
   border-radius: 20px;
   padding: .45rem 1.5rem;
@@ -222,7 +228,10 @@ form .submitBtn {
   font-size: 1rem;
   color: black;
 }
-.submitBtn:hover, #addClassficationBtn:hover, #addVehicleBtn:hover {
+.submitBtn:hover, 
+#addClassficationBtn:hover, #addVehicleBtn:hover,
+#updateVehicleBtn:hover,
+#updateAccBtn:hover, #updatePswdBtn:hover{
   background-color: var(--secondary-color);
   color: white;
 }
@@ -288,7 +297,9 @@ span#pswdBtnReg {
 }
 
 /*---------- ADD CLASSIFICATION PAGE ----------*/
-#addClassficationBtn, #addVehicleBtn {
+#addClassficationBtn, #addVehicleBtn, 
+#updateVehicleBtn,
+.updateAccBtn, .updatePswdBtn {
   border: none;
   border-radius: 20px;
   padding: .45rem 1.5rem;
@@ -319,4 +330,41 @@ span#pswdBtnReg {
   border-radius: 5px;
   font-size: .9rem;
   margin-bottom: 1rem;
+} 
+/*---------- MANAGE INVENTORY PAGE ----------*/
+#inventoryDisplay {
+  padding-left: 2rem;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  font-size: 18px;
+  text-align: left;
+}
+thead {
+  background-color: #f2f2f2;
+}
+th, td {
+  padding: 12px 15px;
+  border: 1px solid #ddd;
+}
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+a {
+  text-decoration: none;
+  color: var(--primary-color);
+}
+a:hover {
+  text-decoration: underline;
+}
+/*---------- UPDATE ACCOUNT PAGE ----------*/
+.passwordReq {
+  display: block;
+  text-align: left;
 }
