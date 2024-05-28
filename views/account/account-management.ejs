@@ -11,15 +11,11 @@
    </ul>
 <% } %>
 
-<% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
-    <h2>Welcome <%= locals.accountData.account_firstname %></h2>
-<% } else { %>
-    <h2>Welcome Basic</h2> 
-<% } %>
+<h2>Welcome <%= locals.accountData.account_firstname %></h2>
 
 <p>You're logged in</p>
-
-<a href="/account/update/<%= locals.accountData.account_id %>">Edit Account Information</a> <!-- modify href -->
+<p>Account Type: <%= locals.accountData.account_type %></p>
+<a href="/account/update/<%= locals.accountData.account_id %>">Edit Account Information</a>
 
 <% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
     <h2>Inventory Management</h2>
