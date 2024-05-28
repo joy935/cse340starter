@@ -181,7 +181,7 @@ invCont.buildUpdateVehicle = async (req, res, next) => {
   let nav = await utilities.getNav()
 
   res.render("./inventory/edit-inventory", {
-    title: "Edit" + vehiculeName,
+    title: "Edit " + vehiculeName,
     nav,
     classificationList,
     errors: null,
