@@ -178,6 +178,8 @@ validate.updateRules = () => {
 validate.checkUpdateData = async (req, res, next) => {
     const { account_firstname, account_lastname, account_email, account_id } = req.body
     let errors = []
+    const accountId = parseInt(req.body.account_id)
+    const accountData = await accountModel.getAccountByAccountId(accountId)
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
@@ -185,10 +187,10 @@ validate.checkUpdateData = async (req, res, next) => {
         errors,
         title: "Edit Account",
         nav,
-        account_firstname,
-        account_lastname,
-        account_email,
-        account_id,
+        account_firstname: accountData.account_firstname,
+        account_lastname: accountData.account_lastname,
+        account_email: accountData.account_email,
+        account_id: accountData.account_id,
       })
       return
     }
@@ -219,20 +221,21 @@ validate.updatePasswordRules = () => {
   * Check data and return errors or continue to update password
   * ***************************** */
 validate.checkUpdatePasswordData = async (req, res, next) => {
-    const { account_firstname, account_lastname, account_email, account_id } = req.body
+    const { account_firstname, account_lastname, account_email, account_password, account_id } = req.body
     const accountId = parseInt(req.body.account_id)
     const accountData = await accountModel.getAccountByAccountId(accountId)
     let errors = []
     errors = validationResult(req)
     if (!errors.isEmpty()) {
       let nav = await utilities.getNav()
-      res.render("account/update/" + accountData.account_id, {
+      res.render("account/update", {
         errors,
         title: "Edit Account",
         nav,
         account_firstname: accountData.account_firstname,
         account_lastname: accountData.account_lastname,
         account_email: accountData.account_email,
+        account_password: accountData.account_password,
         account_id: accountData.account_id,
       })
       return
