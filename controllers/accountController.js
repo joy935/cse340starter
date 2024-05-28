@@ -97,7 +97,7 @@ async function accountLogin(req, res) {
   try {
    if (await bcrypt.compare(account_password, accountData.account_password)) {
    delete accountData.account_password
-   const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
+   const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600})
    if(process.env.NODE_ENV === 'development') {
      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
      } else {
@@ -119,7 +119,6 @@ async function buildAccounManagement(req, res) {
     title: "Account Management",
     nav,
     errors: null,
-
   })
 }
 
@@ -148,49 +147,50 @@ async function updateAccount(req, res) {
   let nav = await utilities.getNav()
   const { account_firstname, account_lastname, account_email, account_id } = req.body
 
-    const accountData = await accountModel.updateAccount(
-      account_firstname,
-      account_lastname,
-      account_email,
-      account_id
-    )
-  const account = await accountModel.getAccountByAccountId(account_id)
-
-  if (accountData) {
+  // const accountId = parseInt(req.body.account_id)
+  const resultAccount = await accountModel.updateAccount( account_firstname, account_lastname, account_email, account_id,)
+  const accountData = await accountModel.getAccountByAccountId(account_id)
+  
+  if (resultAccount) {
     try {
-      const accessToken = jwt.sign(account, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 })
-      if (process.env.NODE_ENV === 'development') {
-        res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
-      } else {
-        res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 })
-      }
+      // const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 })
+      // res.cookie("jwt", acccessToken, { httpOnly: true, maxAge: 3600 * 1000 })
 
-      //update session data
-      req.session.account = account
-
+        // Remove sensitive data before signing the JWT token
+        // delete accountData.account_password;
+        // const accessToken = jwt2.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600 * 1000 });
+  
+        // // Setting cookie with JWT token
+        // if (process.env.NODE_ENV === 'development') {
+        //   res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 });
+        // } else {
+        //   res.cookie("jwt", accessToken, { httpOnly: true, secure: true, maxAge: 3600 * 1000 });
+        // }
+      // Update session data
+      req.session.account = accountData;
       req.flash("notice", "Congratulations, your information has been updated.")
       return res.redirect("/account/management")
 
     } catch (error) {
       req.flash("notice", "Error updating account. Please try again.");
-      return res.status(403).redirect("/account/update/" + account.account_id);
+      return res.status(403).redirect("/account/update/" + accountData.account_id);
     }
   } else {
     req.flash("notice", "Account update failed.")
     const accountId = parseInt(req.params.account_id)
-    const account = await accountModel.getAccountByAccountId(accountId)
-    res.status(501).render("account/update/" + account.account_id, {
+    const accountData = await accountModel.getAccountByAccountId(accountId)
+    res.status(501).render("account/update/" + accountData.account_id, {
       title: "Edit Account",
       nav,
       errors: null,
-      account_firstname: account.account_firstname,
-      account_lastname: account.account_lastname,
-      account_email: account.account_email,
-      account_id: account.account_id,
+      account_firstname: accountData.account_firstname,
+      account_lastname: accountData.account_lastname,
+      account_email: accountData.account_email,
+      account_id: accountData.account_id,
     })
   }
 }
-
+ 
 /* ****************************************
 * Process Update Password Account
 * *************************************** */
@@ -224,7 +224,7 @@ async function updatePassword(req, res) {
     res.redirect("/account/management") 
   } else {
     req.flash("notice", "Password update failed.")
-    res.status(501).render("account/update", {
+    res.status(501).render("account/update/" + accountData.account_id, {
       title: "Edit Account",
       nav,
       errors: null,
