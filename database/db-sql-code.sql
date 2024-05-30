@@ -247,3 +247,26 @@ UPDATE inventory
     	inv_thumbnail = REPLACE(inv_thumbnail, '/images/', '/images/vehicles/')
 	WHERE inv_image LIKE '/images/%.jpg'
   	AND inv_thumbnail LIKE '/images/%-tn.jpg';
+
+-- Table structure for table `wishlist`
+CREATE TABLE IF NOT EXISTS public.wishlist
+(
+    wishlist_id SERIAL PRIMARY KEY,
+    wishlist_date TIMESTAMP NOT NULL,
+    account_id INTEGER NOT NULL,
+    inv_id INTEGER NOT NULL
+);
+
+-- Create relationship between `wishlist` and `account` tables
+ALTER TABLE IF EXISTS public.wishlist
+    ADD CONSTRAINT fk_account FOREIGN KEY(account_id)
+    REFERENCES public.account (account_id) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION;
+
+-- Create relationship between `wishlist` and `inventory` tables
+ALTER TABLE IF EXISTS public.wishlist
+    ADD CONSTRAINT fk_inventory FOREIGN KEY(inv_id)
+    REFERENCES public.inventory (inv_id) MATCH SIMPLE
+    ON UPDATE CASCADE
+    ON DELETE NO ACTION;
