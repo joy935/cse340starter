@@ -98,10 +98,27 @@ async function updatePassword (
   }
 }
 
+/* *****************************
+* Get wishlist data (performed a join with inventory table)
+* ***************************** */
+async function getWishlist(account_id) {
+  try {
+    const sql = `
+      SELECT wishlist.wishlist_id, wishlist.inv_id, inventory.inv_make, inventory.inv_model
+      FROM wishlist
+      INNER JOIN inventory ON wishlist.inv_id = inventory.inv_id
+      WHERE wishlist.account_id = $1
+    `;
+    
+    const data = await pool.query(sql, [account_id]);
+    return data.rows;
+  } catch (error) {
+    console.error("Error fetching wishlist: ", error);
+  }
+}
+
 module.exports = {
-  registerAccount, 
-  checkExistingEmail, 
-  getAccountByEmail,
-  getAccountByAccountId,
-  updateAccount,
-  updatePassword};
+  registerAccount, checkExistingEmail, 
+  getAccountByEmail, getAccountByAccountId,
+  updateAccount, updatePassword,
+   getWishlist };
