@@ -55,4 +55,7 @@ router.post(
 // Route to handle the logout
 router.get("/logout", utilities.handleErrors(accountController.logout))
 
+// Route to build the wishlist view
+router.get("/wishlist/:account_id", utilities.handleErrors(accountController.buildWishlist))
+
 module.exports = router;
