@@ -15,7 +15,8 @@
 
 <p>You're logged in</p>
 <p>Account Type: <%= locals.accountData.account_type %></p>
-<a href="/account/update/<%= locals.accountData.account_id %>">Edit Account Information</a>
+<p><a href="/account/update/<%= locals.accountData.account_id %>">Edit Account Information</a></p>
+<p><a href="/account/wishlist/<%= locals.accountData.account_id%>">View Wishlist</a></p>
 
 <% if (locals.accountData.account_type === 'Employee' || locals.accountData.account_type === 'Admin') { %>
     <h2>Inventory Management</h2>
