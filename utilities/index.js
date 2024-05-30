@@ -82,6 +82,7 @@ Util.buildSingleView = async function(vehicle){
       detail += '</div>'  
     detail += '</div>'
   detail += '</div>'
+  detail += '<button id="addWishlist" title="Add ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' to your wishlist">Add to Wishlist</button>'
 } else {
   detail += '<p class="notice">Sorry, that vehicle could not be found.</p>'
 }
@@ -151,5 +152,20 @@ Util.checkLogin = (req, res, next) => {
     return res.redirect("/account/login")
   }
  }
+
+/* ****************************************
+ *  Build the wishlist list
+ * ************************************ */
+Util.displayWishlist = async function (data) {
+  let wishlist = '<ul class="wishlist">'
+  data.forEach((row) => {
+    wishlist += '<li>'
+    wishlist += '<a href="/inv/detail/' + row.inv_id + '" title="View ' + row.inv_make + ' ' + row.inv_model + ' details">'
+    wishlist += row.inv_make + ' ' + row.inv_model + '</a>'
+    wishlist += '</li>'
+  })
+  wishlist += '</ul>'
+  return wishlist
+}
 
 module.exports = Util;
