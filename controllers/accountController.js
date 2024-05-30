@@ -250,9 +250,28 @@ async function logout(req, res) {
   }
 }
 
+/* ****************************************
+* Build Wishlist View
+* *************************************** */
+async function buildWishlist(req, res) {
+  let nav = await utilities.getNav()
+
+  const accountId = parseInt(req.params.account_id)
+
+  const wishlistData = await accountModel.getWishlist(accountId)
+  const wishlist = await utilities.displayWishlist(wishlistData)
+  res.render("account/wishlist", {
+    title: "Wishlist",
+    nav,
+    errors: null,
+    wishlist,
+  })
+}
+
   module.exports = { 
     buildLogin, accountLogin,
     buildRegister, registerAccount, 
     buildAccounManagement, 
     buildUpdateAccount, updateAccount,
-    updatePassword, logout }
+    updatePassword, logout,
+    buildWishlist }
