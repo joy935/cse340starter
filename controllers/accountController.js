@@ -84,6 +84,7 @@ async function accountLogin(req, res) {
   let nav = await utilities.getNav()
   const { account_email, account_password } = req.body
   const accountData = await accountModel.getAccountByEmail(account_email)
+
   if (!accountData) {
    req.flash("notice", "Please check your credentials and try again.")
    res.status(400).render("account/login", {
@@ -92,12 +93,17 @@ async function accountLogin(req, res) {
     errors: null,
     account_email,
    })
-  return
+  return;
   }
+
   try {
    if (await bcrypt.compare(account_password, accountData.account_password)) {
    delete accountData.account_password
    const accessToken = jwt.sign(accountData, process.env.ACCESS_TOKEN_SECRET, { expiresIn: 3600})
+
+   // Store account data in session
+   req.session.accountData = accountData;
+
    if(process.env.NODE_ENV === 'development') {
      res.cookie("jwt", accessToken, { httpOnly: true, maxAge: 3600 * 1000 })
      } else {
@@ -268,10 +274,25 @@ async function buildWishlist(req, res) {
   })
 }
 
+/* ****************************************
+* Add to Wishlist
+* *************************************** */
+async function addToWishlist(req, res) {
+  const { account_id, inv_id, wishlist_date } = req.body
+  const result = await accountModel.addToWishlist(account_id, inv_id, wishlist_date)
+  if (result) {
+    req.flash("notice", "Inventory added to wishlist.")
+    res.redirect("/account/wishlist/" + account_id)
+  } else {
+    req.flash("notice", "Inventory not added to wishlist.")
+    res.redirect("/account/wishlist/" + account_id)
+  }
+}
+
   module.exports = { 
     buildLogin, accountLogin,
     buildRegister, registerAccount, 
     buildAccounManagement, 
     buildUpdateAccount, updateAccount,
     updatePassword, logout,
-    buildWishlist }
+    buildWishlist, addToWishlist }
