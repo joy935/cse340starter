@@ -1,5 +1,7 @@
 const utilities = require("../utilities/")
 const invModel = require("../models/inventory-model")
+const accountModel = require("../models/account-model")
+const { parse } = require("dotenv")
 
 const invCont = {}
 
@@ -23,9 +25,16 @@ invCont.buildByClassificationId = async function (req, res, next) {
  *  Build single view for vehicle
  * ************************** */
 invCont.buildBySingleId = async function (req, res, next) {
-  const singleId = req.params.singleId
+  const singleId = parseInt(req.params.singleId);
   const vehicule = await invModel.getVehiculeById(singleId);
-  const singleView = await utilities.buildSingleView(vehicule)
+  const accountData = req.session.accountData;
+
+  if (!accountData) {
+    return res.status(401).send("You must be logged in to view this page.")
+  }
+  
+  const singleView = await utilities.buildSingleView(vehicule, accountData)
+
   let nav = await utilities.getNav()
   if (!vehicule) {
     return res.status(404).send("Vehicle not found");
