@@ -117,8 +117,21 @@ async function getWishlist(account_id) {
   }
 }
 
+/* *****************************
+* Add to wishlist
+* ***************************** */
+async function addToWishlist(account_id, inv_id, wishlist_date) {
+  try {
+    const sql = "INSERT INTO wishlist (account_id, inv_id, wishlist_date) VALUES ($1, $2, $3) RETURNING *";
+    const data = await pool.query(sql, [account_id, inv_id, wishlist_date]);
+    return data.rows[0];
+  } catch (error) {
+    console.error("Error adding to wishlist: ", error);
+  }
+}
+
 module.exports = {
   registerAccount, checkExistingEmail, 
   getAccountByEmail, getAccountByAccountId,
   updateAccount, updatePassword,
-   getWishlist };
+  getWishlist, addToWishlist };
