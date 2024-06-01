@@ -5,6 +5,7 @@ const utilities = require("../utilities")
 const accountController = require("../controllers/accountController")
 const regValidate = require('../utilities/account-validation')
 const authorisationMiddleware = require("../middleware/authorisationMiddleware")
+const authorizeWishlist = require("../middleware/authorizeWishlist")
 
 // LOGIN ROUTES
 // Route to build the login view
@@ -60,16 +61,16 @@ router.get("/logout", utilities.handleErrors(accountController.logout))
 // WISHLIST ROUTES
 // Route to build the wishlist view
 router.get("/wishlist/:account_id",
-    authorisationMiddleware,
+    authorizeWishlist,
     utilities.handleErrors(accountController.buildWishlist))
 // Route to handle the add to wishlist
 router.post("/wishlist", 
-    authorisationMiddleware,
+    authorizeWishlist,
     regValidate.checkWishlistData,
     utilities.handleErrors(accountController.addToWishlist))
 // Route to handle the delete from wishlist
 router.post("/wishlist/delete", 
-    authorisationMiddleware,
+    authorizeWishlist,
     utilities.handleErrors(accountController.deleteFromWishlist))
 
 module.exports = router;
