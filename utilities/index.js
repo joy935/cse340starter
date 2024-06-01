@@ -172,6 +172,10 @@ Util.checkLogin = (req, res, next) => {
  *  Build the wishlist list
  * ************************************ */
 Util.displayWishlist = async function (data) {
+  if (data.length === 0) {
+    return 0; // no wishlist items
+  }
+
   let wishlist = '<ul class="wishlist">'
   data.forEach((row) => {
     wishlist += '<li>'
