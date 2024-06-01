@@ -129,9 +129,35 @@ async function addToWishlist(account_id, inv_id, wishlist_date) {
     console.error("Error adding to wishlist: ", error);
   }
 }
+/* ***************************
+* Get wishlist by account_id and inv_id
+* ************************** */
+async function getWishlistByWishlistId(wishlist_id) {
+  try {
+    const sql = "SELECT * FROM wishlist WHERE wishlist_id = $1";
+    const data = await pool.query(sql, [wishlist_id]);
+    return data.rows[0];
+  } catch (error) {
+    console.error("Error fetching wishlist: ", error);
+  }
+}
+
+/* *****************************
+* Remove from wishlist
+* ***************************** */
+async function deleteFromWishlist(wishlist_id) {
+  try {
+    const sql = "DELETE FROM wishlist WHERE wishlist_id = $1";
+    const data = await pool.query(sql, [wishlist_id]);
+    return data;  // return true if deleted
+  } catch (error) {
+    console.error("Error removing from wishlist: ", error);
+  }
+}
 
 module.exports = {
   registerAccount, checkExistingEmail, 
   getAccountByEmail, getAccountByAccountId,
   updateAccount, updatePassword,
-  getWishlist, addToWishlist };
+  getWishlist, addToWishlist, 
+  getWishlistByWishlistId, deleteFromWishlist };
