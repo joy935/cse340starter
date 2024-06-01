@@ -243,4 +243,19 @@ validate.checkUpdatePasswordData = async (req, res, next) => {
     next()
   }
 
+/* ******************************
+* Check data and return errors or continue to wishlist
+* ***************************** */
+validate.checkWishlistData = async (req, res, next) => {
+  const { inv_id, account_id, wishlist_id, wishlist_date } = req.body
+  let errors = []
+  errors = validationResult(req)
+  if (!errors.isEmpty()) {
+    req.flash("notice", "Item not added to wishlist.")
+    res.redirect("/inventory")
+    return
+  }
+  next()
+}
+
   module.exports = validate
