@@ -96,7 +96,7 @@ Util.buildSingleView = async function(vehicle, accountData){
                     + String(currentDate.getSeconds()).padStart(2, '0');
 
   detail += '<input type="hidden" id="wishlist_date" name="wishlist_date" value="' + formattedDate + '">'
-  detail += '<button id="addWishlist" title="Add ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' to your wishlist">Add to Wishlist</button>'
+  detail += '<button id="addWishlistBtn" title="Add ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' to your wishlist">Add to Wishlist</button>'
   detail += '</form>'
 } else {
   detail += '<p class="notice">Sorry, that vehicle could not be found.</p>'
@@ -178,15 +178,15 @@ Util.displayWishlist = async function (data) {
 
   let wishlist = '<ul class="wishlist">'
   data.forEach((row) => {
-    wishlist += '<li>'
-    wishlist += '<a href="/inv/detail/' + row.inv_id + '" title="View ' + row.inv_make + ' ' + row.inv_model + ' details">'
+    wishlist += '<li class="wishlistList" >'
+    wishlist += '<a class="wishlistLink" href="/inv/detail/' + row.inv_id + '" title="View ' + row.inv_make + ' ' + row.inv_model + ' details">'
     wishlist += row.inv_make + ' ' + row.inv_model + '</a>' 
     wishlist += '<form action="/account/wishlist/delete" method="POST" id="removeForm">'
     wishlist += '<input type="hidden" id="inv_id" name="inv_id" value="' + row.inv_id + '">'
     wishlist += '<input type="hidden" id="account_id" name="account_id" value="' + row.account_id + '">'
     wishlist += '<input type="hidden" id="wishlist_id" name="wishlist_id" value="' + row.wishlist_id + '">'
     wishlist += '<input type="hidden" id="wishlist_date" name="wishlist_date" value="' + row.wishlist_date + '">'
-    wishlist += '<button type="submit" class="remove" title="Remove ' + row.inv_make + ' ' + row.inv_model + ' from your wishlist">Remove</button>'
+    wishlist += '<button type="submit" class="removeFromWishlistBtn" title="Remove ' + row.inv_make + ' ' + row.inv_model + ' from your wishlist">Remove</button>'
     wishlist += '</form>'
     wishlist += '</li>'
   })
