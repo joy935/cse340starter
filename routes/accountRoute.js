@@ -59,9 +59,11 @@ router.get("/logout", utilities.handleErrors(accountController.logout))
 // WISHLIST ROUTES
 // Route to build the wishlist view
 router.get("/wishlist/:account_id", utilities.handleErrors(accountController.buildWishlist))
-// Route to hangle the add to wishlist
+// Route to handle the add to wishlist
 router.post("/wishlist", 
-regValidate.checkWishlistData,
-utilities.handleErrors(accountController.addToWishlist))
+    regValidate.checkWishlistData,
+    utilities.handleErrors(accountController.addToWishlist))
+// Route to handle the delete from wishlist
+router.post("/wishlist/delete", utilities.handleErrors(accountController.deleteFromWishlist))
 
 module.exports = router;
