@@ -1,5 +1,5 @@
 const pswdBtn = document.querySelector('#pswdBtn');
-console.log(pswdBtn);
+
 pswdBtn.addEventListener('click', function() {
     const pswdInput = document.querySelector('#password');
     const type = pswdInput.getAttribute('type') 
