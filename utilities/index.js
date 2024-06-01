@@ -62,7 +62,7 @@ Util.buildClassificationGrid = async function(data){
 /* **************************************
 * Build the detail view HTML
 * ************************************ */
-Util.buildSingleView = async function(vehicle){
+Util.buildSingleView = async function(vehicle, accountData){
   let detail = '';
   if(vehicle) {
   detail = '<div id="single-display">'
@@ -82,7 +82,24 @@ Util.buildSingleView = async function(vehicle){
       detail += '</div>'  
     detail += '</div>'
   detail += '</div>'
+  // detail += '<form action="/inv/detail/'+ vehicle.inv_id+'" method="POST" id="wishlistForm">'
+  // detail += '<form action="/account/wishlist/'+ accountData.account_id +'" method="POST" id="wishlistForm">'
+  detail += '<form action="/account/wishlist" method="POST" id="wishlistForm">'
+  detail += '<input type="hidden" id="inv_id" name="inv_id" value="' + vehicle.inv_id + '">'
+  detail += '<input type="hidden" id="account_id" name="account_id" value="' + accountData.account_id + '">'
+
+  // Format the date as "YYYY-MM-DD HH:MM:SS"
+  let currentDate = new Date();
+  let formattedDate = currentDate.getFullYear() + "-" 
+                    + String(currentDate.getMonth() + 1).padStart(2, '0') + "-" 
+                    + String(currentDate.getDate()).padStart(2, '0') + " " 
+                    + String(currentDate.getHours()).padStart(2, '0') + ":" 
+                    + String(currentDate.getMinutes()).padStart(2, '0') + ":" 
+                    + String(currentDate.getSeconds()).padStart(2, '0');
+
+  detail += '<input type="hidden" id="wishlist_date" name="wishlist_date" value="' + formattedDate + '">'
   detail += '<button id="addWishlist" title="Add ' + vehicle.inv_make + ' ' + vehicle.inv_model + ' to your wishlist">Add to Wishlist</button>'
+  detail += '</form>'
 } else {
   detail += '<p class="notice">Sorry, that vehicle could not be found.</p>'
 }
