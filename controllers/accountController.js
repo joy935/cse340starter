@@ -288,6 +288,24 @@ async function addToWishlist(req, res) {
     res.redirect("/account/wishlist/" + account_id)
   }
 }
+/* ****************************************
+* Delete from Wishlist
+* *************************************** */
+async function deleteFromWishlist(req, res) {
+  const { wishlist_id} = req.body
+
+  const account_id = parseInt(req.body.account_id)
+  const wishlistData = await accountModel.getWishlistByWishlistId(wishlist_id)
+  const result = await accountModel.deleteFromWishlist(wishlist_id)
+  
+  if (result) {
+    req.flash("notice", "Inventory was successfully deleted from wishlist.")
+    res.redirect("/account/wishlist/" + wishlistData.account_id)
+  } else {
+    req.flash("notice", "Sorry, the delete failed.")
+    res.redirect("/account/wishlist/" + wishlistDataaccount_id)
+  }
+}
 
   module.exports = { 
     buildLogin, accountLogin,
@@ -295,4 +313,4 @@ async function addToWishlist(req, res) {
     buildAccounManagement, 
     buildUpdateAccount, updateAccount,
     updatePassword, logout,
-    buildWishlist, addToWishlist }
+    buildWishlist, addToWishlist, deleteFromWishlist }
