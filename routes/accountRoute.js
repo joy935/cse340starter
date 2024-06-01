@@ -4,6 +4,7 @@ const router = new express.Router()
 const utilities = require("../utilities")
 const accountController = require("../controllers/accountController")
 const regValidate = require('../utilities/account-validation')
+const authorisationMiddleware = require("../middleware/authorisationMiddleware")
 
 // LOGIN ROUTES
 // Route to build the login view
@@ -58,12 +59,17 @@ router.get("/logout", utilities.handleErrors(accountController.logout))
 
 // WISHLIST ROUTES
 // Route to build the wishlist view
-router.get("/wishlist/:account_id", utilities.handleErrors(accountController.buildWishlist))
+router.get("/wishlist/:account_id",
+    authorisationMiddleware,
+    utilities.handleErrors(accountController.buildWishlist))
 // Route to handle the add to wishlist
 router.post("/wishlist", 
+    authorisationMiddleware,
     regValidate.checkWishlistData,
     utilities.handleErrors(accountController.addToWishlist))
 // Route to handle the delete from wishlist
-router.post("/wishlist/delete", utilities.handleErrors(accountController.deleteFromWishlist))
+router.post("/wishlist/delete", 
+    authorisationMiddleware,
+    utilities.handleErrors(accountController.deleteFromWishlist))
 
 module.exports = router;
