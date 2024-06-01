@@ -176,19 +176,32 @@ Util.displayWishlist = async function (data) {
     return 0; // no wishlist items
   }
 
-  let wishlist = '<ul class="wishlist">'
+  // Create a map to count occurrences of each item
+  const vehicleMap = new Map();
   data.forEach((row) => {
-    wishlist += '<li class="wishlistList" >'
-    wishlist += '<a class="wishlistLink" href="/inv/detail/' + row.inv_id + '" title="View ' + row.inv_make + ' ' + row.inv_model + ' details">'
-    wishlist += row.inv_make + ' ' + row.inv_model + '</a>' 
-    wishlist += '<form action="/account/wishlist/delete" method="POST" id="removeForm">'
-    wishlist += '<input type="hidden" id="inv_id" name="inv_id" value="' + row.inv_id + '">'
-    wishlist += '<input type="hidden" id="account_id" name="account_id" value="' + row.account_id + '">'
-    wishlist += '<input type="hidden" id="wishlist_id" name="wishlist_id" value="' + row.wishlist_id + '">'
-    wishlist += '<input type="hidden" id="wishlist_date" name="wishlist_date" value="' + row.wishlist_date + '">'
-    wishlist += '<button type="submit" class="removeFromWishlistBtn" title="Remove ' + row.inv_make + ' ' + row.inv_model + ' from your wishlist">Remove</button>'
-    wishlist += '</form>'
-    wishlist += '</li>'
+    const key = row.inv_make + ' ' + row.inv_model;
+    if (!vehicleMap.has(key)) {
+      vehicleMap.set(key, { ...row, count: 1 });
+    } else {
+      vehicleMap.get(key).count++;
+    }
+  });
+
+  let wishlist = '<ul class="wishlist">'
+  vehicleMap.forEach((row) => {
+    for (let i = 1; i <= row.count; i++) {
+      wishlist += '<li class="wishlistList" >'
+      wishlist += '<a class="wishlistLink" href="/inv/detail/' + row.inv_id + '" title="View ' + row.inv_make + ' ' + row.inv_model + ' details">'
+      wishlist += i + ' ' + row.inv_make + ' ' + row.inv_model + '</a>' 
+      wishlist += '<form action="/account/wishlist/delete" method="POST" id="removeForm">'
+      wishlist += '<input type="hidden" id="inv_id" name="inv_id" value="' + row.inv_id + '">'
+      wishlist += '<input type="hidden" id="account_id" name="account_id" value="' + row.account_id + '">'
+      wishlist += '<input type="hidden" id="wishlist_id" name="wishlist_id" value="' + row.wishlist_id + '">'
+      wishlist += '<input type="hidden" id="wishlist_date" name="wishlist_date" value="' + row.wishlist_date + '">'
+      wishlist += '<button type="submit" class="removeFromWishlistBtn" title="Remove ' + row.inv_make + ' ' + row.inv_model + ' from your wishlist">Remove</button>'
+      wishlist += '</form>'
+      wishlist += '</li>'
+    }
   })
   wishlist += '</ul>'
   return wishlist
