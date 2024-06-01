@@ -260,6 +260,10 @@ input:required:valid {
   border: 1px solid green;
 }
 /*---------- REGISTER PAGE ----------*/
+#registerAccBtn {
+  color: var(--secondary-color);
+  text-decoration: underline;
+}
 #register-form {
   margin: 2rem 0;
   border: 2px solid var(--secondary-color);
