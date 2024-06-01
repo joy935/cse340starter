@@ -9,4 +9,9 @@
   <%  }) %>
    </ul>
 <% } %>
-<%- wishlist %>
+<% if (wishlist === 0) { %>  <!-- Check if wishlist is empty -->
+    <p>Nothing in the wishlist, really?</p>
+    <a href="/inv/type/1">Browse the Custom inventory</a>
+<% } else { %>
+    <%- wishlist %>
+<% } %>
