@@ -286,7 +286,7 @@ invCont.buildDeleteVehicle = async (req, res, next) => {
   let nav = await utilities.getNav()
 
   res.render("./inventory/delete-confirm", { // relative or absolute path?
-    title: "Delete" + vehiculeName,
+    title: "Delete " + vehiculeName,
     nav,
     classificationList,
     errors: null,
@@ -335,7 +335,7 @@ invCont.deleteInventory = async function (req, res, next) {
     const vehicleName = `${inv_make} ${inv_model}`
     req.flash("notice", "Sorry, the delete failed.")
     res.status(501).render("./inventory/delete-confirm", {
-      title: "Delete" + vehicleName,
+      title: "Delete " + vehicleName,
       nav,
       classificationList,
       errors: null,
